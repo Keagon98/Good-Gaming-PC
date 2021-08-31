@@ -1,14 +1,18 @@
+require("dotenv").config()
+
 module.exports = {
   siteMetadata: {
-    siteUrl: "https://www.yourdomain.tld",
+    siteUrl: "https://shopify-demo.gatsbyjs.com",
     title: "GG-PC",
   },
   plugins: [
     {
       resolve: "gatsby-source-shopify",
       options: {
-        shopName: "gg-pcs.myshopify.com",
-        accessToken: "f51f4d3ea34cc64c8f1b33cf0a77b6b6",
+        apiKey: process.env.SHOPIFY_API_KEY,
+        password: process.env.SHOPIFY_SHOP_PASSWORD,
+        storeUrl: process.env.GATSBY_SHOPIFY_STORE_URL,
+        shopifyConnections: ["collections"],
       },
     },
     "gatsby-plugin-gatsby-cloud",
