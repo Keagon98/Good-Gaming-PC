@@ -2,8 +2,17 @@ require("dotenv").config()
 
 module.exports = {
   siteMetadata: {
+    siteTitle: "gatsby-starter-shopify",
+    siteTitleDefault: "gatsby-starter-shopify by @GatsbyJS",
     siteUrl: "https://shopify-demo.gatsbyjs.com",
-    title: "GG-PC",
+    hrefLang: "en",
+    siteDescription:
+      "A Gatsby starter using the latest Shopify plugin showcasing a store with product overview, individual product pages, and a cart.",
+    siteImage: "/default-og-image.jpg",
+    twitter: "@gatsbyjs",
+  },
+  flags: {
+    FAST_DEV: true,
   },
   plugins: [
     {
@@ -15,17 +24,19 @@ module.exports = {
         shopifyConnections: ["collections"],
       },
     },
-    "gatsby-plugin-gatsby-cloud",
     "gatsby-plugin-image",
     "gatsby-plugin-sharp",
     "gatsby-transformer-sharp",
-    {
-      resolve: "gatsby-source-filesystem",
+    "gatsby-plugin-react-helmet",
+    "gatsby-plugin-sitemap",
+    "gatsby-plugin-gatsby-cloud",
+    // Add your Google Analytics ID to the .env file to enable
+    // Otherwise, this plugin can be removed
+    process.env.GOOGLE_ANALYTICS_ID && {
+      resolve: "gatsby-plugin-google-analytics",
       options: {
-        name: "images",
-        path: "./src/images/",
+        trackingId: process.env.GOOGLE_ANALYTICS_ID,
       },
-      __key: "images",
     },
-  ],
-};
+  ].filter(Boolean),
+}
